@@ -14,7 +14,7 @@
 }
 
 #hero-bg {
-    background-image: url("./assets/hero_bg.jpg");
+    background-image: url("../assets/hero_bg.jpg");
     min-height: 800px;
     background-attachment: fixed;
     background-position: center;
@@ -26,8 +26,8 @@
 }
 
 #hero-text-container {
-    font-size: 2rem;
-    line-height: 4.5rem;
+    font-size: 3.5rem;
+    line-height: 6rem;
 }
 
 .Home h1 {

@@ -3,23 +3,42 @@
     padding: 0.25rem 0.75rem;
 }
 
+.User .container {
+    margin: 200px 0;
+    padding: 0 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    line-height: 3rem;
+}
+
 .User form {
     margin: 50px 0;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
     width: fit-content;
-}
-
-.User .label {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+    line-height: 3rem;
+    text-align: left;
 }
 
 .User form input {
-    margin-left: 2rem;
     font-size: 1.5rem;
     padding-left: 0.5rem;
+    width: 100%;
+}
+
+.User button {
+    color: #fff6f0;
+}
+
+.User .btn1 {
+    background-image: linear-gradient(180deg, rgb(0, 0, 0, 0.5) 0%, rgba(0,0,0,0.6) 100%), url("../assets/texture1.jpg") ;
+}
+
+.User .btn2 {
+    background-image: linear-gradient(180deg, rgb(0, 0, 0, 0.4) 0%, rgba(0,0,0,0.6) 100%), url("../assets/texture2.jpg") ;
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import './styles/Login.css'
 import Register from './Register'
+import Input from './Input'
 
 const Login = () => {
     //this is to switch to register form
@@ -19,27 +19,12 @@ const Login = () => {
                 <h1>You are not logged in.</h1>
                 {registerState ? <Register /> :
                 <form onSubmit={handleSubmit}>
-                    <label>Username:
-                        <input
-                            autoComplete='off'
-                            type='text'
-                            value={username} 
-                            onChange={(event) => {setUsername(event.target.value)}}
-                            placeholder='Username'/>
-                    </label>
-
-                    <label>Password:
-                        <input
-                            autoComplete='off'
-                            type='password'
-                            value={password}
-                            onChange={(event) => {setPassword(event.target.value)}}
-                            placeholder='Password'/>
-                    </label>
-                    <button type='submit'>Sign In</button>
+                    <Input Label={'Username'} Type={'text'} passData={(d) => {setUsername(d)}}/>
+                    <Input Label={'Password'} Type={'password'} passData={(d) => {setPassword(d)}}/>
+                    <button type='submit' className='btn1'>Sign In</button>
                 </form>
                 }
-                <button onClick={() => setRegisterState(!registerState)}>{registerState ? 'Back to log in' : 'New user? Register here!'}</button>
+                <button className='btn2' onClick={() => setRegisterState(!registerState)}>{registerState ? 'Back to log in' : 'New user? Register here!'}</button>
             </div>
         </div>
     )

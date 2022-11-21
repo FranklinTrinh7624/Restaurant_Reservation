@@ -1,46 +1,29 @@
 import { useState } from 'react'
-import './styles/Register.css'
+import Input from './Input'
 
 const Register = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
-    const [mailaddress, setMailaddress] = useState('')
-    const [billaddress, setBilladdress] = useState('')
+    const [data, setData] = useState({
+        username: '',
+        password: '',
+        firstname: '',
+        lastname: '',
+        mailaddress: '',
+        billaddress: ''
+    })
     const handleSubmit = (event) => {
         event.preventDefault();
         // fetch authentication
-        alert(`Username: ${username}\nPassword: ${password}`)
+        alert(`Username: ${data.username}\nPassword: ${data.password}\nFirstname: ${data.firstname}\nLastname: ${data.lastname}`)
     }
+
     return (
         <form onSubmit={handleSubmit}>
-            <label>Username:
-                <input
-                    autoComplete='off'
-                    type='text'
-                    value={username} 
-                    onChange={(event) => {setUsername(event.target.value)}}
-                    placeholder='Username'/>
-            </label>
-
-            <label>Password:
-                <input
-                    autoComplete='off'
-                    type='password'
-                    value={password}
-                    onChange={(event) => {setPassword(event.target.value)}}
-                    placeholder='Password'/>
-            </label>
-
-            <label>Name:
-                <input
-                    autoComplete='off'
-                    type='text'
-                    value={name}
-                    onChange={(event) => {setName(event.target.value)}}
-                    placeholder='Name'/>
-            </label>
-            <button type='submit'>Register</button>
+            <Input Label={'Username'} Type={'text'} passData={(d) => {setData(prevData => ({...prevData, username: d}))}}/>
+            <Input Label={'Password'} Type={'password'} passData={(d) => {setData(prevData => ({...prevData, password: d}))}}/>
+            <Input Label={'First Name'} Type={'text'} passData={(d) => {setData(prevData => ({...prevData, firstname: d}))}}/>
+            <Input Label={'Last Name'} Type={'password'} passData={(d) => {setData(prevData => ({...prevData, lastname: d}))}}/>
+            
+            <button type='submit' className='btn1'>Register</button>
         </form>
     )
 }
