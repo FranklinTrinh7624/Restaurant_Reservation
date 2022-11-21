@@ -8,18 +8,20 @@ const ReservationSchema = require('./models/reserveSchema');
 
 
 
-const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
-app.get('/api/customers', cors(), (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'John', lastName: 'Doe'},
-    {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-    {id: 3, firstName: 'Mary', lastName: 'Swanson'},
+// app.get('/api/customers', (req, res) => {
+//   const customers = [
+//     {id: 1, firstName: 'John', lastName: 'Doe'},
+//     {id: 2, firstName: 'Brad', lastName: 'Traversy'},
+//     {id: 3, firstName: 'Mary', lastName: 'Swanson'},
 
-  ];
+//   ];
 
-  res.json(customers);
-});
+//   res.json(customers);
+// });
 
 mongoose.connect("mongodb+srv://sakibz:sakibzafar123@beardencluster.cp0uqer.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true})
   .then(() => {
