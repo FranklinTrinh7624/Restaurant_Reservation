@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const UserSchema = require('./models/userSchema');
 const ProfileSchema = require('./models/userInfoSchema');
 const ReservationSchema = require('./models/reserveSchema');
+const Users = require('./models/userSchema');
 
 
 
@@ -22,6 +23,31 @@ app.use(cors());
 
 //   res.json(customers);
 // });
+
+app.post('/api/login', async (req, res) => {
+  try {
+    const username = req.body.logUser;
+    const password = req.body.logPassword;
+    const {logUser, logPassword}  = req.body;
+
+    const accExists = await UserSchema.findOne({username: logUser});
+    if(!accExists) res.json({error: "User does not exist"});
+
+    const dbPassword = accExists.password; //getting password from the database
+    bcrypt.compare(logPassword, dbPassword).then((match) => {
+      if(!match) {
+        res.json({error: "Wrong user and password combination"});
+      }
+
+      //if match, do something about the session
+      else {
+        res.json({msg: "Logged in"});
+      }
+    })
+  } catch (err) {
+    console.log(err)
+  }
+});
 
 mongoose.connect("mongodb+srv://sakibz:sakibzafar123@beardencluster.cp0uqer.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true})
   .then(() => {
