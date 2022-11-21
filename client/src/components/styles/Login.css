@@ -1,0 +1,9 @@
+.Login .container {
+    margin: 200px 0;
+    padding: 0 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

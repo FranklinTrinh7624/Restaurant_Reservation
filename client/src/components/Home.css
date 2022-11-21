@@ -1,0 +1,48 @@
+.Home .hero {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Home .main {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    margin: 200px 0;
+    padding: 0 20%;
+    font-size: 1.5rem;
+}
+
+#hero-bg {
+    background-image: url("./assets/hero_bg.jpg");
+    min-height: 800px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-text-container {
+    font-size: 2rem;
+    line-height: 4.5rem;
+}
+
+.Home h1 {
+    font-family: 'Rye', cursive;
+}
+
+.Home h2 {
+    font-family: 'Syne Mono', monospace;
+}
+
+.Home p {
+    margin: 50px 0;
+}
+
+.Home .main h2 {
+    text-align: center;
+    line-height: 3rem;
+}

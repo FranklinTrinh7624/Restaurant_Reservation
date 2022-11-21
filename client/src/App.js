@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Fragment, Component } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Customers from './components/customers';
+import Navbar from './components/Navbar'
+import Home from './components/Home';
+import User from './components/User'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App Test">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Express Starterr test</h1>
-        </header>
-        <Customers />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className='App'>
+                <header className='App-header'>
+                    <Navbar />
+                </header>
+                <Routes>
+                    <Fragment><Route path="/" element={<Home />} /></Fragment>
+                    <Fragment><Route path="/user" element={<User />} /></Fragment>
+                </Routes>
+            </div>
+        )
+    }
 }
 
 export default App;

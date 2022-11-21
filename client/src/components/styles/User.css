@@ -1,0 +1,25 @@
+.User, .User button {
+    font-size: 1.4rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.User form {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: fit-content;
+}
+
+.User .label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.User form input {
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    padding-left: 0.5rem;
+}

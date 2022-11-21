@@ -1,5 +1,31 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition-timing-function: cubic-bezier(0, 0.7, 0.58, 1);
+            transition-timing-function: cubic-bezier(0, 0.7, 0.58, 1);
+}
+
+html,
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    width: 100%;
+    height: auto;
+    font-family: 'PT Serif', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0e0600;
+    color: #fff6f0;
+    font-weight: 100;
+    font-size: 18px;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    letter-spacing: 0.14rem;
+    line-height: 1.8rem;
+    filter: sepia(50%) contrast(150%) saturate(140%) brightness(90%) hue-rotate(-15deg);
+}
+
+a, a:link {
+    text-decoration: none;
+    color: #e2b58b;
 }
