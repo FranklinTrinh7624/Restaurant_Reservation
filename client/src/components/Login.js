@@ -31,7 +31,7 @@ const Login = () => {
     return (
         <div className='Login'>
             <div className='container'>
-                <h1>You are not logged in.</h1>
+                <h1>{registerState ? 'Register' : 'You are not logged in.'}</h1>
                 {registerState ? <Register /> :
                 <form onSubmit={handleSubmit}>
                     <Input label={'Username'} type={'text'} placeholder={'Username'} data={d => setLogUsername(d)}/>
