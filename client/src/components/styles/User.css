@@ -4,8 +4,8 @@
 }
 
 .User .container {
-    margin: 200px 0;
-    padding: 0 25%;
+    margin: 100px 0;
+    padding: 0 15%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -16,23 +16,32 @@
 
 .User form {
     margin: 50px 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 1rem;
     width: fit-content;
     line-height: 3rem;
     text-align: left;
 }
 
-.User form input {
+.User form input,
+.User form select {
     font-size: 1.5rem;
     padding-left: 0.5rem;
+    margin-bottom: 2rem;
     width: 100%;
 }
 
 .User button {
     color: #fff6f0;
+}
+
+.User form input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    margin: 0 50px;
+}
+
+#register-button {
+    margin-top: 3rem;
 }
 
 .User .btn1 {

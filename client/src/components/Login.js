@@ -26,7 +26,7 @@ const Login = () => {
                 alert(res.data.msg);
             }
         });
-        //alert(`Username: ${logUsername}\nPassword: ${logPassword}`)
+        console.log(logUsername);console.log(logPassword)
     }
     return (
         <div className='Login'>
@@ -34,8 +34,8 @@ const Login = () => {
                 <h1>You are not logged in.</h1>
                 {registerState ? <Register /> :
                 <form onSubmit={handleSubmit}>
-                    <Input Label={'Username'} Type={'text'} passData={(d) => {setLogUsername(d)}}/>
-                    <Input Label={'Password'} Type={'password'} passData={(d) => {setLogPassword(d)}}/>
+                    <Input label={'Username'} type={'text'} placeholder={'Username'} data={d => setLogUsername(d)}/>
+                    <Input label={'Password'} type={'password'} placeholder={'Password'} data={d => setLogPassword(d)}/>
                     <button type='submit' className='btn1'>Sign In</button>
                 </form>
                 }
