@@ -7,7 +7,7 @@ const userInfoSchema = new mongoose.Schema ({
     mailingAdd: {type: String, required: true, trim: true},
     billingAdd: {type: String, required: true, trim: true},
     dinerNumber: {type: Number, required: true},
-    earnedPoints: {type: Number}, //will be randomized
+    earnedPoints: {type: Number}, 
     preferPayment: {type: String, required: true},
 
 

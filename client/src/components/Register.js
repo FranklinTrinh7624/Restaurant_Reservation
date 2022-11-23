@@ -14,7 +14,7 @@ class Register extends Component {
                 lastname: '',
                 mailaddress: '',
                 billaddress: '',
-                numOfPeople: '',
+                //numOfPeople: '',
                 paymentChoice: ''
             },
             tempMailAdd: {
@@ -45,10 +45,37 @@ class Register extends Component {
     }
 
     axiosRequest = () => {
-        console.log(this.state.formData)    // this console log is just for testing
+        //console.log(this.state.formData)    // this console log is just for testing
         // use this.state.formData
         // so username would be this.state.formData.username and so on
+        axios({
+            method: "POST",
+            data: {
+                regiUsername: this.state.formData.username,
+                regiPassword: this.state.formData.password,
+                firstn: this.state.formData.firstname,
+                lastn: this.state.formData.lastname,
+                mailAddy: this.state.formData.mailaddress,
+                billAddy: this.state.formData.billaddress,
+                paymentOpt: this.state.formData.paymentChoice,
 
+            },
+            withCredentials: true,
+            url: "http://localhost:5000/api/register"
+        }).then((res) => {
+            if(res.data.error) {
+                alert(res.data.error);
+            }
+            else if(res.data.error1) {
+                alert(res.data.error1);
+            }
+            else if(res.data.error2) {
+                alert(res.data.error2);
+            }
+            else {
+                alert(res.data.msg);
+            }
+        })
     }
 
     countryOptionList = Options.countryOptions.map((opt, key) => (

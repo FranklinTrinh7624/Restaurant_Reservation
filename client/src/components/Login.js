@@ -26,7 +26,7 @@ const Login = () => {
                 alert(res.data.msg);
             }
         });
-        console.log(logUsername);console.log(logPassword)
+        //console.log(logUsername);console.log(logPassword)
     }
     return (
         <div className='Login'>
