@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const UserSchema = require('./models/userSchema');
 const ProfileSchema = require('./models/userInfoSchema');
 const ReservationSchema = require('./models/reserveSchema');
-const Users = require('./models/userSchema');
+//const Users = require('./models/userSchema');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session)
@@ -137,6 +137,7 @@ app.post('/api/login', async (req, res) => {
     
     const userSession = {username: accExists.username}
     req.session.user = userSession; 
+
     //req.session.user = logUsername //storing the user's information in the session 
 
     // req.session.save(function (err) { //saviung the seesion before redierction 
@@ -149,6 +150,13 @@ app.post('/api/login', async (req, res) => {
     console.log(err)
   }
 });
+
+app.get('/api/profile', async (req,res) =>) {  //get profile info and send to front end to be displayed
+  const customerProfile = await ProfileSchema.find({username: req.session.user});
+
+  if(!customerProfile) return res.json({error: "Cannot retrieve profile"});
+  res.send(customerProfile);
+}
 
 
 app.get('/isAuth', async (req,res)=>{
