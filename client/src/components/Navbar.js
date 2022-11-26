@@ -7,6 +7,7 @@ const Navbar = (props) => {
             <ul>
                 <li id="logo"><img src={require("./assets/logo_bear.png")} alt="Bear Den logo" width="200" height="150" /></li>
                 <Link to={'/'}><li>Home</li></Link>
+                <Link to={'/reservation'}><li>Reservations</li></Link>
                 {/* show username instead of login if the user is already logged in example: welcome, [username]*/}
                 {/* use ternary operator with props */}
                 <Link to={'/user'} ><li>Login</li></Link>
