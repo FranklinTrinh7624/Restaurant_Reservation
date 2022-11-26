@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors({
     origin: "http://localhost:3000",
-    methods: ['POST','PUT','GET','OPTIONS','HEAD'],
+    methods: ['POST','PUT','PATCH','GET','OPTIONS','HEAD'],
     credentials: true
 }));
 
@@ -31,15 +31,6 @@ const store = new MongoDBSession({
 })
 
 
-const oneDay = 1000 * 60 * 60 *24;
-app.use(session({ //intializing the session parameters
-    secret: 'secretkey',
-    name: 'session-id',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {maxAge: oneDay},
-    store: store,
-}));
 
 function dinerNumberDigit(min, max){
     return (Math.floor(Math.random() * (max - min) + min))
@@ -110,6 +101,16 @@ app.post('/api/register', async (req,res) => {
 
 });
 
+const oneDay = 1000 * 60 * 60 *24;
+app.use(session({ //intializing the session parameters
+    secret: 'secretkey',
+    name: 'session-id',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: oneDay},
+    store: store,
+}));
+
 app.post('/api/login', async (req, res) => {
     try {
     // const username = req.body.logUser;
@@ -150,30 +151,40 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.get('/api/profile', async (req,res) => {  //get profile info and send to front end to be displayed
-    console.log(typeof(req.session.user))
-    const customerProfile = await ProfileSchema.find({username: req.session.user});
+    console.log(typeof(req.session.user)) //for testing purposes
+
+    //on the assumption the user is logged in
+    const myJSON = JSON.stringify(req.session.user);
+    let obj = JSON.parse(myJSON);
+    console.log(typeof(obj.username)); //for testing, should be string
+
+    const customerProfile = await ProfileSchema.find({username: obj.username});
 
     if(!customerProfile) return res.json({error: "Cannot retrieve profile"});
     res.send(customerProfile);
 })
 
 
+app.post('/logout', (req, res) => {
+  try {
+      req.session.destroy()
+      res.clearCookie('session-id')
+      res.send("User logged out.")
+  } catch (err) {
+      console.log(err)
+  }
+});
+
 app.get('/isAuth', async (req,res)=>{
     if(req.session.user) {
+        console.log("you are here")
         return res.json(req.session.user)
     } else {
-        return res.status(401).json('unautthorize')
+        console.log("unauthorized")
+        return res.json({error:'In unauthorized state, please login'})
     }
 })
 
-app.get('/logout', (req, res) => {
-    try {
-        req.session.destroy()
-        res.send("User logged out.")
-    } catch (err) {
-        console.log(err)
-    }
-});
 
 mongoose.connect("mongodb+srv://ftrinh777:ftrinh777@clusterbear.lagbzdc.mongodb.net/BearDen?retryWrites=true&w=majority", {useNewUrlParser: true})
     .then(() => {

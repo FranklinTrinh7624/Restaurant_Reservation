@@ -23,9 +23,9 @@ class Profile extends Component {
         //fetch axios here
         //then assign them to this.state, I'll do the assignment - Lewis
         axios({
-            method: "get",
+            method: "GET",
             withCredentials: true,
-            url: "http://localhost:5000/isAuth",
+            url: "http://localhost:5000/api/profile",
         }).then((res) => {
             if(res.data.error){
                 alert(res.data.error);
@@ -44,13 +44,13 @@ class Profile extends Component {
 
     logoutRequest = () => {
         axios({
-            method: "post",
+            method: "POST",
             withCredentials: true,
             url: "http://localhost:5000/logout",
         }).then((res) => {
             if(res.data.error){
                 alert(res.data.error);
-            }
+            }   
             else {
                 this.setState(prev => ({...prev, profile: {...prev.profile}}))
             }

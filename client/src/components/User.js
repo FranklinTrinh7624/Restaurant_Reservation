@@ -15,9 +15,9 @@ class User extends Component {
     
     componentDidMount = () => {
         axios({
-            method: "get",
+            method: "GET",
             withCredentials: true,
-            url: "http://localhost:5000/api/profile",
+            url: "http://localhost:5000/isAuth",
         }).then((res) => {
             if(res.data.error){
                 alert(res.data.error);
