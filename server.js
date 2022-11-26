@@ -151,12 +151,12 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-app.get('/api/profile', async (req,res) =>) {  //get profile info and send to front end to be displayed
+app.get('/api/profile', async (req,res) => {  //get profile info and send to front end to be displayed
   const customerProfile = await ProfileSchema.find({username: req.session.user});
 
   if(!customerProfile) return res.json({error: "Cannot retrieve profile"});
   res.send(customerProfile);
-}
+})
 
 
 app.get('/isAuth', async (req,res)=>{
