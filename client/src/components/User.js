@@ -1,19 +1,41 @@
-import { useState } from "react"
+import { Component } from "react"
 import './styles/User.css'
 import Profile from "./Profile"
 import Login from "./Login"
+import axios from "axios"
 
-const User = (props) => {
+class User extends Component {
     // react state to check whether user is logged in or not
-    const [isLoggedIn, setLogInStatus] = useState(false)
-
-    // fetch
-
-    return (
-        <div className='User'>
-            {isLoggedIn ? <Profile /> : <Login />}
-        </div>
-    )
+    constructor (props){
+        super(props)
+        this.state = {
+            isLoggedIn: false
+        }
+    }
+    
+    componentDidMount = () => {
+        axios({
+            method: "get",
+            withCredentials: true,
+            url: "http://localhost:5000/api/profile",
+        }).then((res) => {
+            if(res.data.error){
+                alert(res.data.error);
+            }
+            else {
+                this.setState(prev => ({...prev, isLoggedIn: true}))
+                console.log(res)
+            }
+        });
+    }
+    
+    render () {
+        return (
+            <div className='User'>
+                {this.state.isLoggedIn ? <Profile /> : <Login logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}}/>}
+            </div>
+        )
+    }
 }
 
 export default User

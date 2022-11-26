@@ -21,10 +21,11 @@ class Input extends Component {
         return (
             <label>{this.props.label}:<br />
                 <input
+                    disabled={this.props.disabled}
                     required={this.props.req}
                     autoComplete='off'
                     type={this.props.type}
-                    value={this.state.input}
+                    value={this.props.editmode ? this.props.profilevalue : this.state.input}
                     onChange={this.handleOnChange}
                     placeholder={this.props.placeholder}/>
             </label>
@@ -37,14 +38,19 @@ Input.defaultProps = {
     type: '',
     placeholder: '',
     data: '',
-    req: true
+    req: true,
+    disabled: false,
+    profilevalue: '',
+    editmode: false
 }
 
 Input.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    req: PropTypes.bool
+    req: PropTypes.bool,
+    disabled: PropTypes.bool,
+    editmode: PropTypes.bool
 }
 
 export default Input

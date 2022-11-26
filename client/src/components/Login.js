@@ -1,20 +1,25 @@
-import { useState } from 'react'
+import { Component } from 'react'
 import Register from './Register'
 import Input from './Input'
 import axios from 'axios'
 
-const Login = () => {
-    //this is to switch to register form
-    const [registerState, setRegisterState] = useState(false)
+class Login extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            registerState: false,
+            loginState: false,
+            logUsername: '',
+            logPassword: ''
+        }
+    }
 
-    const [logUsername, setLogUsername] = useState('')
-    const [logPassword, setLogPassword] = useState('')
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (event) => {
+        event.preventDefault()
         // fetch authentication
         axios({
             method: "POST",
-            data: {logUsername, logPassword},
+            data: {logUsername: this.state.logUsername, logPassword: this.state.logPassword},
             withCredentials: true,
             url: "http://localhost:5000/api/login"
         }).then((res) => {
@@ -24,25 +29,33 @@ const Login = () => {
             //else do something about session(token stuff?)
             else {
                 alert(res.data.msg);
+                this.setState(prev => ({...prev, loginState: true}), this.logInState)
             }
         });
         //console.log(logUsername);console.log(logPassword)
     }
-    return (
-        <div className='Login'>
-            <div className='container'>
-                <h1>{registerState ? 'Register' : 'You are not logged in.'}</h1>
-                {registerState ? <Register /> :
-                <form onSubmit={handleSubmit}>
-                    <Input label={'Username'} type={'text'} placeholder={'Username'} data={d => setLogUsername(d)}/>
-                    <Input label={'Password'} type={'password'} placeholder={'Password'} data={d => setLogPassword(d)}/>
-                    <button type='submit' className='btn1'>Sign In</button>
-                </form>
-                }
-                <button className='btn2' onClick={() => setRegisterState(!registerState)}>{registerState ? 'Back to log in' : 'New user? Register here!'}</button>
+
+    logInState = () => {
+        this.props.logInState(this.state.loginState)
+    }
+
+    render() {
+        return (
+            <div className='Login'>
+                <div className='container'>
+                    <h1>{this.state.registerState ? 'Register' : this.state.loginState ? '' : 'You are not logged in.'}</h1>
+                    {this.state.registerState ? <Register /> :
+                    <form onSubmit={this.handleSubmit}>
+                        <Input label={'Username'} type={'text'} placeholder={'Username'} data={d => this.setState(prev => ({...prev, logUsername: d}))}/>
+                        <Input label={'Password'} type={'password'} placeholder={'Password'} data={d => this.setState(prev => ({...prev, logPassword: d}))}/>
+                        <button type='submit' className='btn1'>Sign In</button>
+                    </form>
+                    }
+                    <button className='btn2' onClick={() => this.setState(prev => ({...prev, registerState: !prev.registerState}))}>{this.state.registerState ? 'Back to log in' : 'New user? Register here!'}</button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Login
