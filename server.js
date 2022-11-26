@@ -30,6 +30,16 @@ const store = new MongoDBSession({
 
 })
 
+const oneDay = 1000 * 60 * 60 *24;
+app.use(session({ //intializing the session parameters
+    secret: 'secretkey',
+    name: 'session-id',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: oneDay},
+    store: store,
+}));
+
 
 
 function dinerNumberDigit(min, max){
@@ -101,15 +111,6 @@ app.post('/api/register', async (req,res) => {
 
 });
 
-const oneDay = 1000 * 60 * 60 *24;
-app.use(session({ //intializing the session parameters
-    secret: 'secretkey',
-    name: 'session-id',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {maxAge: oneDay},
-    store: store,
-}));
 
 app.post('/api/login', async (req, res) => {
     try {
