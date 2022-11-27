@@ -24,7 +24,6 @@ class User extends Component {
             }
             else {
                 this.setState(prev => ({...prev, isLoggedIn: true}))
-                console.log(res)
             }
         });
     }
@@ -32,7 +31,7 @@ class User extends Component {
     render () {
         return (
             <div className='User'>
-                {this.state.isLoggedIn ? <Profile /> : <Login logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}}/>}
+                {this.state.isLoggedIn ? <Profile logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}} /> : <Login logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}}/>}
             </div>
         )
     }

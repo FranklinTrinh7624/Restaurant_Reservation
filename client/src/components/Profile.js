@@ -7,15 +7,16 @@ class Profile extends Component {
         super(props)
         this.state = {
             profile: {
-                firstname: 'filler data',
-                lastname: 'filler data',
-                mailingAddress: 'filler data',
-                billingAddress: 'filler data',
-                preferredDiner: 69,
-                points: 69,
-                paymentMethod: 'filler data'
+                firstname: '',
+                lastname: '',
+                mailingAddress: '',
+                billingAddress: '',
+                preferredDiner: 0,
+                points: 0,
+                paymentMethod: ''
             },
-            watchMode: true
+            watchMode: true,
+            loginState: true
         }
     }
 
@@ -31,7 +32,17 @@ class Profile extends Component {
                 alert(res.data.error);
             }
             else {
-                this.setState(prev => ({...prev, profile: {...prev.profile}}))
+                const fetchData = res.data[0]
+                console.log(fetchData)
+                this.setState(prev => ({...prev, profile: {...prev.profile,
+                    firstname: fetchData.firstname,
+                    lastname: fetchData.lastname,
+                    mailingAddress: fetchData.mailingAdd,
+                    billingAddress: fetchData.billingAdd,
+                    preferredDiner: fetchData.dinerNumber,
+                    points: fetchData.__v,
+                    paymentMethod: fetchData.preferPayment
+                }}))
             }
         });
     }
@@ -52,9 +63,13 @@ class Profile extends Component {
                 alert(res.data.error);
             }   
             else {
-                this.setState(prev => ({...prev, profile: {...prev.profile}}))
+                this.setState(prev => ({...prev, profile: {...prev.profile}, loginState: false}), this.logInState)
             }
         });
+    }
+
+    logInState = () => {
+        this.props.logInState(this.state.loginState)
     }
 
     render() {

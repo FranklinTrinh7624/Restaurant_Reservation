@@ -132,18 +132,8 @@ app.post('/api/login', async (req, res) => {
             }
         })
 
-        req.session.regenerate(function (err) { //might not need, just to prevent session fixation
-            if (err) next(err)
-
-            const userSession = {username: accExists.username}
-            req.session.user = userSession; 
-
-        //req.session.user = logUsername //storing the user's information in the session 
-
-        // req.session.save(function (err) { //saviung the seesion before redierction 
-        //   if (err) return next(err)
-        // })
-        })
+        const userSession = {username: accExists.username}
+        req.session.user = userSession;
 
 
         } catch (err) {
@@ -196,7 +186,6 @@ mongoose.connect("mongodb+srv://ftrinh777:ftrinh777@clusterbear.lagbzdc.mongodb.
     .catch((err)=> {
     console.log(err);
 });
-
 
 // const port = 5000;
 // app.listen(port, () => `Server running on port ${port}`);
