@@ -10,7 +10,7 @@ const ReservationSchema = require('./models/reserveSchema');
 //const Users = require('./models/userSchema');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const MongoDBSession = require('connect-mongodb-session')(session)
+const MongoDBSession = require('connect-mongodb-session')(session);
 
 
 //app.use(express.static(path.join(__dirname,'client','build')));
@@ -159,7 +159,7 @@ app.get('/api/profile', async (req,res) => {  //get profile info and send to fro
 app.post('/logout', (req, res) => {
   try {
       req.session.destroy()
-      res.clearCookie('session-id')
+      res.clearCookie('session-id', {domain:'localhost', path:'/'})
       res.send("User logged out.")
   } catch (err) {
       console.log(err)
