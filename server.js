@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors({
     origin: "http://localhost:3000",
-    methods: ['POST','PUT','PATCH','GET','OPTIONS','HEAD'],
+    methods: ['POST','PUT','GET','OPTIONS','HEAD'],
     credentials: true
 }));
 
@@ -153,6 +153,30 @@ app.get('/api/profile', async (req,res) => {  //get profile info and send to fro
 
     if(!customerProfile) return res.json({error: "Cannot retrieve profile"});
     res.send(customerProfile);
+});
+
+app.put('/api/update', async (req,res)=>{
+  const myJSON = JSON.stringify(req.session.user);
+  let obj = JSON.parse(myJSON);
+  console.log(typeof(obj.username)); //for testing, should be string
+
+  try{
+    const filter = {
+      firstname: req.body.uptFirstName,
+      lastname: req.body.uptLastName,
+      mailingAdd: req.body.uptMailAddress,
+      billingAdd: req.body.uptBillAddress,
+      preferPayment: req.body.uptPayMethod,
+    }
+    const getProfile = await ProfileSchema.findOneAndUpdate({username: obj.username}, filter, {new: true});
+    return res.json({msg: "Success update"});
+
+  } catch (error) {
+    console.log(error);
+    res.json({err: "Something went with update"});
+  }
+
+
 })
 
 

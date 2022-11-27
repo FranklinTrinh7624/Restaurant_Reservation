@@ -51,6 +51,26 @@ class Profile extends Component {
         event.preventDefault()
         // axios to edit profile here
         // use this.state.profile
+        //using patch
+        axios({
+            method: "PUT",
+            data: {
+                uptFirstName: this.state.profile.firstname,
+                uptLastName: this.state.profile.lastname,
+                uptMailAddress: this.state.profile.mailingAddress,
+                uptBillAddress: this.state.profile.billingAddress,
+                uptPayMethod: this.state.profile.paymentMethod,
+            },
+            withCredentials: true,
+            url: "http://localhost:5000/api/update",
+        }).then((res) => {
+            if(res.data.err) {
+                alert(res.data.err);
+            }
+            else {
+                alert("UPDATE SUCCESS");
+            }
+        })
     }
 
     logoutRequest = () => {
@@ -82,7 +102,7 @@ class Profile extends Component {
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.lastname} label={'Last Name'} type={'text'} placeholder={'Last name'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, lastname: d}}))}/>
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.mailingAddress} label={'Mailing Address'} type={'text'} placeholder={'Mailing address'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, mailingAddress: d}}))}/>
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.billingAddress} label={'Billing Address'} type={'text'} placeholder={'Billing address'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, billingAddress: d}}))}/>
-                        <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.preferredDiner} label={'Preferred Number of Diners'} type={'number'} placeholder={'Preferred number of diners'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, preferredDiner: d}}))}/>
+                        <Input editmode={true} disabled={true} profilevalue={this.state.profile.preferredDiner} label={'Preferred Diner Number'} type={'number'} placeholder={'Preferred diner number'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, preferredDiner: d}}))}/>
                         <Input editmode={true} disabled={true} profilevalue={this.state.profile.points} label={'Points'} type={'number'} placeholder={''} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, points: d}}))}/>
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.paymentMethod} label={'Payment Method'} type={'text'} placeholder={'Payment method'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, paymentMethod: d}}))}/>
                         <button className='btn1' type='submit' disabled={this.state.watchMode}>Save Changes</button>
