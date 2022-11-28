@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Input from './Input'
 import axios from 'axios'
+import Options from './jsons/Options.json'
 
 class Profile extends Component {
     constructor(props) {
@@ -92,6 +93,10 @@ class Profile extends Component {
         this.props.logInState(this.state.loginState)
     }
 
+    paymentOptionList = Options.paymentOptions.map((opt, key) => (
+        <option key={key} values={`${opt.code}`}>{opt.type}</option>
+    ))
+
     render() {
         return (
             <div className='Profile'>
@@ -104,7 +109,16 @@ class Profile extends Component {
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.billingAddress} label={'Billing Address'} type={'text'} placeholder={'Billing address'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, billingAddress: d}}))}/>
                         <Input editmode={true} disabled={true} profilevalue={this.state.profile.preferredDiner} label={'Preferred Diner Number'} type={'number'} placeholder={'Preferred diner number'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, preferredDiner: d}}))}/>
                         <Input editmode={true} disabled={true} profilevalue={this.state.profile.points} label={'Points'} type={'number'} placeholder={''} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, points: d}}))}/>
-                        <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.paymentMethod} label={'Payment Method'} type={'text'} placeholder={'Payment method'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, paymentMethod: d}}))}/>
+                        <label>Payment Method:<br />
+                            <select
+                                disabled={this.state.watchMode}
+                                required
+                                value={this.state.profile.paymentMethod}
+                                onChange={(e)=>this.setState(prev => ({...prev, profile: {...prev.profile, paymentMethod: e.target.value}}))}>
+                                    <option value="" disabled>Select A Payment Method</option>
+                                    {this.paymentOptionList}
+                            </select>
+                        </label>
                         <button className='btn1' type='submit' disabled={this.state.watchMode}>Save Changes</button>
                     </form>
                     <>
