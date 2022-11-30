@@ -41,7 +41,7 @@ class Profile extends Component {
                     mailingAddress: fetchData.mailingAdd,
                     billingAddress: fetchData.billingAdd,
                     preferredDiner: fetchData.dinerNumber,
-                    points: fetchData.__v,
+                    points: fetchData.earnedPoints,
                     paymentMethod: fetchData.preferPayment
                 }}))
             }

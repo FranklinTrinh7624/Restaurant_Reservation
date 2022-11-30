@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const path = require('path');
 const cors = require('cors');
@@ -9,7 +10,6 @@ const ProfileSchema = require('./models/userInfoSchema');
 const ReservationSchema = require('./models/reserveSchema');
 //const Users = require('./models/userSchema');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 
 
@@ -35,7 +35,7 @@ app.use(session({ //intializing the session parameters
     secret: 'secretkey',
     name: 'session-id',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {maxAge: oneDay},
     store: store,
 }));
@@ -45,6 +45,15 @@ app.use(session({ //intializing the session parameters
 function dinerNumberDigit(min, max){
     return (Math.floor(Math.random() * (max - min) + min))
 }
+
+function hasWhiteSpace(arg) {
+    return (/\s/).test(arg);
+}
+
+// function protectGuest(arg){
+//     return (arg.includes('guest'))
+// }
+
 
 app.post('/api/register', async (req,res) => {
 
@@ -66,8 +75,14 @@ app.post('/api/register', async (req,res) => {
         else if(req.body.regiUsername.length < 8){
             return res.json({error1: "User should be 8 characters minimum"});
         }
+        else if(hasWhiteSpace(req.body.regiUsername)) {
+            return res.json({error1: "Username should not have whitespace"});
+        }
         else if(req.body.regiPassword.length < 8){
             return res.json({errror2: "Password should be 8 chracters minimum"});
+        }
+        else if(hasWhiteSpace(req.body.regiPassword)) {
+            return res.json({error2: "Password should not have whitespace"});
         }
 
         let hashpass;
