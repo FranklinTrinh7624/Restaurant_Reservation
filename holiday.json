@@ -1,0 +1,17 @@
+{
+    "holidays": [
+        {"date": "Jan 01"},
+        {"date": "Jan 17"},
+        {"date": "Feb 21"},
+        {"date": "Apr 17"},
+        {"date": "May 08"},
+        {"date": "May 30"},
+        {"date": "Jun 19"},
+        {"date": "Jul 04"},
+        {"date": "Sep 05"},
+        {"date": "Nov 11"},
+        {"date": "Nov 24"},
+        {"date": "Dec 24"},
+        {"date": "Dec 25"}
+    ]
+}
