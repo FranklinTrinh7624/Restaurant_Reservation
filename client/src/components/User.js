@@ -21,7 +21,7 @@ class User extends Component {
             url: "http://localhost:5000/isAuth",
         }).then((res) => {
             if(res.data.error){
-                alert(res.data.error);
+                //alert(res.data.error);
             }
             else {
                 this.setState(prev => ({...prev, isLoggedIn: true}))

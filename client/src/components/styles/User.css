@@ -52,6 +52,11 @@
     margin-top: 3rem;
 }
 
+.alert-text {
+    font-size: 2.5rem;
+    color: red;
+}
+
 .User form input:disabled {
     color: #0e0600;
     background-color: #e2b58b;
