@@ -6,8 +6,12 @@ const reserveSchema = new mongoose.Schema ({
     lastname: {type: String, required: true, trim: true},
     phone: {type: String, required: true, trim: true, minlength: 10},
     email: {type: String, required: true, trim: true},
-    date: {type: Date, required: true},
+    date: {type: String, required: true},
     numGuest: {type: Number, required: true},
+    reservedTables: {type: String}
+    ccNumber: {type: String},
+    ccExpire: {type: String},
+    ccv: {type: Number},
 
 })
 
