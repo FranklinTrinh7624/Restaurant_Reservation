@@ -11,7 +11,7 @@ const reserveSchema = new mongoose.Schema ({
     reservedTables: {type: String},
     ccNumber: {type: String},
     ccExpire: {type: String},
-    ccv: {type: Number},
+    ccv: {type: String},
 
 })
 
