@@ -28,7 +28,7 @@ class Reservation extends Component {
             tableSelected: '',
             registerPrompt: false,
             paymentChoice: '',
-            isHoliday: true,
+            isHoliday: false,
             formData: {
                 firstname: '',
                 lastname: '',
@@ -72,16 +72,16 @@ class Reservation extends Component {
         axios({
             method: "POST",
             data: {
-                firstname: this.state.formData.firstname, //req.body in front
-                lastname: this.state.formData.lastname,
-                phone: this.state.formData.phone,
-                email: this.state.formData.email,
-                date: this.state.formData.date,
-                numGuest: this.state.formData.numGuest,
-                reservedTables: tableSelected,
-                ccNumber: this.state.formData.num,
-                ccExpire: this.state.formData.exp,
-                ccv: this.state.formData.ccv,
+                reFirstn: this.state.formData.firstname, //req.body in front
+                reLastn: this.state.formData.lastname,
+                rePhone: this.state.formData.phone,
+                reEmail: this.state.formData.email,
+                reDate: this.state.formData.date,
+                reGuest: this.state.formData.numGuest,
+                reTable: tableSelected,
+                creditNum: this.state.formData.num,
+                creditExp: this.state.formData.exp,
+                creditCCV: this.state.formData.ccv,
             },
             withCredentials: true,
             url: "http://localhost:5000/api/reservation"

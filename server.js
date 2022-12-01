@@ -233,16 +233,16 @@ app.post('/api/reservation', async(req,res)=>{
 
             const makeReserve = new ReservationSchema({
                 username: obj.username,
-                firstname: reFirstn, //dont forget req.body before reFirstn
-                lastname: reLastn,
-                phone: rePhone,
-                email: reEmail,
-                date: reDate,
-                numGuest: reGuest,
-                reservedTables: reTable,
-                ccNumber: creditNum,
-                ccExpire: creditExp,
-                ccv: creditCCV,
+                firstname: req.body.reFirstn, //dont forget req.body before reFirstn
+                lastname: req.body.reLastn,
+                phone: req.body.rePhone,
+                email: req.body.reEmail,
+                date: req.body.reDate,
+                numGuest: req.body.reGuest,
+                reservedTables: req.body.reTable,
+                ccNumber: req.body.creditNum,
+                ccExpire: req.body.creditExp,
+                ccv: req.body.creditCCV,
             });
             makeReserve.save()
             return res.json({msg: "RESERVED"})
@@ -250,16 +250,16 @@ app.post('/api/reservation', async(req,res)=>{
         else {
             const makeReserveGuest = new ReservationSchema({
                 username: '',
-                firstname: reFirstn, //req.body in front
-                lastname: reLastn,
-                phone: rePhone,
-                email: reEmail,
-                date: reDate,
-                numGuest: reGuest,
-                reservedTables: reTable,
-                ccNumber: creditNum,
-                ccExpire: creditExp,
-                ccv: creditCCV,
+                firstname: req.body.reFirstn, //req.body in front
+                lastname: req.body.reLastn,
+                phone: req.body.rePhone,
+                email: req.body.reEmail,
+                date: req.body.reDate,
+                numGuest: req.body.reGuest,
+                reservedTables: req.body.reTable,
+                ccNumber: req.body.creditNum,
+                ccExpire: req.body.creditExp,
+                ccv: req.body.creditCCV,
 
             })
             makeReserveGuest.save()
