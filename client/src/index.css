@@ -22,10 +22,38 @@ body {
     scroll-behavior: smooth;
     letter-spacing: 0.14rem;
     line-height: 1.8rem;
-    filter: sepia(50%) contrast(150%) saturate(140%) brightness(90%) hue-rotate(-15deg);
+    filter: sepia(50%) contrast(120%) saturate(120%) brightness(90%) hue-rotate(-15deg);
 }
 
 a, a:link {
     text-decoration: none;
     color: #e2b58b;
+}
+
+a, input, button {
+    transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+    transition-duration: 0.5s;
+}
+
+input, button {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+input:hover {
+    filter: grayscale(100%);
+}
+
+a:hover, button:hover {
+    filter: grayscale(100%) brightness(70%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

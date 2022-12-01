@@ -3,6 +3,7 @@ import './styles/User.css'
 import Profile from "./Profile"
 import Login from "./Login"
 import axios from "axios"
+import Navbar from './Navbar'
 
 class User extends Component {
     // react state to check whether user is logged in or not
@@ -31,6 +32,7 @@ class User extends Component {
     render () {
         return (
             <div className='User'>
+                <Navbar loginState={this.state.isLoggedIn} transparentbg={true}/>
                 {this.state.isLoggedIn ? <Profile logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}} /> : <Login logInState={d => {this.setState(prev => ({...prev, isLoggedIn: d}))}}/>}
             </div>
         )

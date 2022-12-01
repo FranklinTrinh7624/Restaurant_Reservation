@@ -100,8 +100,11 @@ class Profile extends Component {
     render() {
         return (
             <div className='Profile'>
+                <div className='hero'>
+                    <div id='hero-bg-user' />
+                    <div id='hero-text-container-user'><h1 id='hero-text-user'>Profile</h1></div>
+                </div>
                 <div className='container'>
-                    <h1>Profile</h1>
                     <form onSubmit={this.handleSubmit}>
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.firstname} label={'First Name'} type={'text'} placeholder={'First name'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, firstname: d}}))}/>
                         <Input editmode={true} disabled={this.state.watchMode} profilevalue={this.state.profile.lastname} label={'Last Name'} type={'text'} placeholder={'Last name'} data={d => this.setState(prev => ({...prev, profile: {...prev.profile, lastname: d}}))}/>
@@ -121,10 +124,10 @@ class Profile extends Component {
                         </label>
                         <button className='btn1' type='submit' disabled={this.state.watchMode}>Save Changes</button>
                     </form>
-                    <>
-                        <button className='btn2' onClick={() => {this.setState(prev => ({...prev, watchMode: !prev.watchMode}))}}>{this.state.watchMode ? 'Edit Profile' : 'Cancel Edit'}</button>
-                        <button className='btn2' onClick={this.logoutRequest}>Log Out</button>
-                    </>
+                    <div className='btn-group'>
+                        <button className='btn3' onClick={() => {this.setState(prev => ({...prev, watchMode: !prev.watchMode}))}}>{this.state.watchMode ? 'Edit Profile' : 'Cancel Edit'}</button>
+                        <button className='btn3' onClick={this.logoutRequest}>Log Out</button>
+                    </div>
                 </div>
             </div>
         )

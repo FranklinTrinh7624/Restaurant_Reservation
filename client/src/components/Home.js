@@ -1,5 +1,7 @@
 import { Component } from 'react'
-import './styles/Home.css';
+import './styles/Home.css'
+import { Link } from "react-router-dom"
+import Navbar from './Navbar'
 
 class Home extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class Home extends Component {
     render() {
         return (
             <div className='Home'>
+                <Navbar loginState={true}/>
                 <div className='hero'>
                     <div id='hero-bg'>
                         <div id='hero-text-container'>
@@ -30,6 +33,13 @@ class Home extends Component {
                     The sides are usually pretty simple, letting the steak be the star of the show. But that doesn't mean they're not delicious.<br /><br />
                     A steakhouse salad is usually a mix of crisp greens and tangy vinaigrette, while the mashed potatoes are smooth and creamy.<br /><br />
                     If you're looking for a truly indulgent meal, a steakhouse is the place to go.<br />Just be sure to save room for dessert. The chocolate lava cake is a must-try.</p>
+                </div>
+                <div className='foot'>
+                    <div id='footing-bg' />
+                    <div id='footing-text-container'>
+                        <h2 id='footing-text'>Can't Wait To Try It Out?</h2>
+                        <Link to={'/reservation'}>Book A Table</Link>
+                    </div>
                 </div>
             </div>
         )
