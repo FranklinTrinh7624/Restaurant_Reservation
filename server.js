@@ -221,12 +221,14 @@ app.put('/api/update', async (req,res)=>{
 app.post('/api/reservation', async(req,res)=>{
     //call reservation schema
     //fill it out and save
-
+    console.log(req.session.user)
     try {
-        if(rePhone > 10) {
+        console.log(req.body.rePhone)
+        if(req.body.rePhone.length >= 11) {
             return res.json({error: "phone number too long"})
         }
         
+
         if(req.session.user) {
             const myJSON = JSON.stringify(req.session.user);
             let obj = JSON.parse(myJSON);
