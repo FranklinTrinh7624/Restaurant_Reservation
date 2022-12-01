@@ -11,6 +11,7 @@
     margin: 200px 0;
     padding: 0 20%;
     font-size: 1.5rem;
+    position: relative;
 }
 
 #hero-bg {
@@ -91,4 +92,31 @@
 
 .Home .foot a:hover {
     filter: invert(100%);
+}
+
+.floating-image {
+    position: absolute;
+    z-index: 3;
+}
+
+#float-1 {
+    background-image: url("../assets/steak1.png");
+    width: 30rem;
+    height: 30rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: -10rem;
+    top: 0;
+}
+
+#float-2 {
+    background-image: url("../assets/steak3.png");
+    width: 30rem;
+    height: 30rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: -10rem;
+    bottom: 0;
 }

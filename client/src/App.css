@@ -1,1 +1,13 @@
+.App-header {
+    height: auto;
+    position: fixed;
+    filter: invert(100%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: -30px;
+}
 

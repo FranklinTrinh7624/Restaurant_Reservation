@@ -25,10 +25,12 @@ class Home extends Component {
                 </div>
                 <div className='main'>
                     <h2>The Best Place To Visit For Prime & Choice Western Beef, Seafood and Chicken.</h2>
+                    <div className='floating-image' id='float-1'/>
                     <p>There's something about a steakhouse that just oozes sophistication.<br /><br />
                     Maybe it's the dark wood paneling, the leather booths, or the waiters in bow ties.<br /><br />
                     Whatever the reason, steakhouse dining feels special.<br /><br />
                     And the food lives up to the hype.<br /><br />
+                    <div className='floating-image' id='float-2'/>
                     A good steakhouse will have dry-aged beef, which has a richer flavor than the wet-aged variety. The meat is cooked over a high heat, resulting in a crispy exterior and a juicy interior.
                     The sides are usually pretty simple, letting the steak be the star of the show. But that doesn't mean they're not delicious.<br /><br />
                     A steakhouse salad is usually a mix of crisp greens and tangy vinaigrette, while the mashed potatoes are smooth and creamy.<br /><br />

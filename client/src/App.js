@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (
             <div className='App'>
-                <header className='App-header'></header>
+                <header className='App-header'><img src={require("./components/assets/decoration.png")} alt="banner decoration" width="300" height="200" id='banner'/></header>
                 <Routes>
                     <Fragment><Route path="/" element={<Home />} /></Fragment>
                     <Fragment><Route path="/reservation" element={<Reservation />} /></Fragment>
