@@ -125,11 +125,12 @@ class Reservation extends Component {
                         {this.state.isLoggedIn ? <></> : <>
                             <Input label={'First Name'} type={'text'} placeholder={'First name'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, firstname: d}}))}/>
                             <Input label={'Last Name'} type={'text'} placeholder={'Last name'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, lastname: d}}))}/>
-                            <Input label={'Phone Number'} type={'number'} placeholder={'Phone number'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, phone: d}}))}/>
-                            <Input label={'Email'} type={'text'} placeholder={'Email address'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, email: d}}))}/>
-                            <Input label={'Date'} type={'text'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, date: d}}))}/>
-                            <Input label={'Number of Guess'} type={'number'} placeholder={'Number of guess'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, numGuest: d}}))}/>
                         </>}
+                        <Input label={'Phone Number'} type={'number'} placeholder={'Phone number'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, phone: d}}))}/>
+                        <Input label={'Email'} type={'text'} placeholder={'Email address'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, email: d}}))}/>
+                        <Input label={'Date'} type={'text'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, date: d}}))}/>
+                        <Input label={'Number of Guess'} type={'number'} placeholder={'Number of guess'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, numGuest: d}}))}/>
+                        
                         {this.state.isHoliday ?
                             <>
                                 <h3 style={{marginTop: '3rem'}}>Due to high traffic, a hold fee of $10 will be required.</h3>
