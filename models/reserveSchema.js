@@ -8,7 +8,7 @@ const reserveSchema = new mongoose.Schema ({
     email: {type: String, required: true, trim: true},
     date: {type: String, required: true},
     numGuest: {type: Number, required: true},
-    reservedTables: {type: String}
+    reservedTables: {type: String},
     ccNumber: {type: String},
     ccExpire: {type: String},
     ccv: {type: Number},
