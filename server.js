@@ -11,6 +11,7 @@ const ReservationSchema = require('./models/reserveSchema');
 //const Users = require('./models/userSchema');
 const bodyParser = require('body-parser');
 const MongoDBSession = require('connect-mongodb-session')(session);
+const holiday = require('./holiday.json');
 
 
 //app.use(express.static(path.join(__dirname,'client','build')));
@@ -193,6 +194,34 @@ app.put('/api/update', async (req,res)=>{
 
 
 })
+
+// app.get('/tables', async (req,res)=>{
+//     //call table function
+//     //console log to check
+//     //send to front end
+// })
+
+// app.get('/api/holiday', async(req,res)=>{
+
+//     console.log(holiday.holidays)
+
+//     for(let i = 0; i < holiday.holidays.length; i++) {
+//         let object = holiday.holidays[i]
+//         for(let property in object) {
+//             if(strDateHere.includes(object[property])) {
+//                 return res.json({message: "Traffic Day"})
+//             }
+//             else {continue}
+//         }
+//     }
+//     res.json({message: "None"})
+
+// })
+
+// app.post('/api/reservation', async(req,res)=>{
+//     //call reservation schema
+//     //fill it out and save
+// })
 
 
 app.post('/logout', (req, res) => {
