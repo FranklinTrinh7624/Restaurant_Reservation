@@ -218,10 +218,59 @@ app.put('/api/update', async (req,res)=>{
 
 // })
 
-// app.post('/api/reservation', async(req,res)=>{
-//     //call reservation schema
-//     //fill it out and save
-// })
+app.post('/api/reservation', async(req,res)=>{
+    //call reservation schema
+    //fill it out and save
+
+    try {
+        if(rePhone > 10) {
+            return res.json({error: "phone number too long"})
+        }
+        
+        if(req.session.user) {
+            const myJSON = JSON.stringify(req.session.user);
+            let obj = JSON.parse(myJSON);
+
+            const makeReserve = new ReservationSchema({
+                username: obj.username,
+                firstname: reFirstn, //dont forget req.body before reFirstn
+                lastname: reLastn,
+                phone: rePhone,
+                email: reEmail,
+                date: reDate,
+                numGuest: reGuest,
+                reservedTables: reTable,
+                ccNumber: creditNum,
+                ccExpire: creditExp,
+                ccv: creditCCV,
+            });
+            makeReserve.save()
+            return res.json({msg: "RESERVED"})
+        }
+        else {
+            const makeReserveGuest = new ReservationSchema({
+                username: '',
+                firstname: reFirstn, //req.body in front
+                lastname: reLastn,
+                phone: rePhone,
+                email: reEmail,
+                date: reDate,
+                numGuest: reGuest,
+                reservedTables: reTable,
+                ccNumber: creditNum,
+                ccExpire: creditExp,
+                ccv: creditCCV,
+
+            })
+            makeReserveGuest.save()
+            return res.json({msg: "RESERVED FOR GUEST"})
+        }
+
+        res.json({error: "Something went wrong, could not reserve"})
+    } catch(err) {
+        console.log("error in api reserve")
+    }
+})
 
 
 app.post('/logout', (req, res) => {
