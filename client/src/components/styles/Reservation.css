@@ -1,0 +1,92 @@
+.tables {
+    background-color: #000000;
+    padding: 10px;
+    height: 40rem;
+    width: 50%;
+    gap: 20px;
+    display: grid;
+    grid-template-areas:
+        's1 s1 s3 s3 s6'
+        's4 s2 s3 s3 s6'
+        's4 s2 s5 s5 s7'
+        's11 s10 s10 s9 s7'
+        's11 s10 s10 s8 s8';
+}
+
+.tables-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.table {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    width: auto;
+    height: auto;
+    transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+    transition-duration: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table:hover {
+    filter: grayscale(100%) brightness(70%);
+}
+
+.Reservation button {
+    color: #fff6f0;
+    font-size: 1.4rem;
+    padding: 0.25rem 0.75rem;
+    margin: 2rem 4rem;
+}
+
+.Reservation .btn1 {
+    background-image: linear-gradient(180deg, rgb(0, 0, 0, 0.5) 0%, rgba(0,0,0,0.6) 100%), url("../assets/texture1.jpg");
+}
+
+.Reservation .btn2 {
+    background-image: linear-gradient(180deg, rgb(0, 0, 0, 0.4) 0%, rgba(0,0,0,0.6) 100%), url("../assets/texture2.jpg") ;
+}
+
+.alert-register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.678);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.Reservation .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-container {
+    width: 100%;
+}
+
+.seats1 {grid-area: s1;}
+.seats2 {grid-area: s2;}
+.seats3 {grid-area: s3;}
+.seats4 {grid-area: s4;}
+.seats5 {grid-area: s5;}
+.seats6 {grid-area: s6;}
+.seats7 {grid-area: s7;}
+.seats8 {grid-area: s8;}
+.seats9 {grid-area: s9;}
+.seats10 {grid-area: s10;}
+.seats11 {grid-area: s11;}
