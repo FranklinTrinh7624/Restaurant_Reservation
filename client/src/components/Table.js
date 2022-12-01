@@ -22,7 +22,7 @@ class Table extends Component {
         const seatID = this.props.id.toString()
         classes.push(`seats${seatID}`)
         return (
-            <div className={classes.join(' ')} onClick={this.handleOnChange} style={{backgroundColor: this.props.selected === this.props.id && this.state.input ? '#C8349B' : '#34CE9B'}}>
+            <div className={classes.join(' ')} onClick={this.handleOnChange} style={{backgroundColor: this.state.input ? '#C8349B' : '#34CE9B'}}>
                 <div>Table {this.props.id}<br />{this.props.seatAmount} seats</div>
             </div>
             // <label>{this.props.label}:<br />
