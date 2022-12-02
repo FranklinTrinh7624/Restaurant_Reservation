@@ -112,11 +112,11 @@ class Reservation extends Component {
             withCredentials: true,
             url: "http://localhost:5000/api/holiday"
         }).then((res) => {
-            if (res.data.error) {
-
+            if (res.data.message === "Traffic Day") {
+                this.setState(prev => ({...prev, isHoliday: true}))
             }
             else {
-
+                this.setState(prev => ({...prev, isHoliday: false}))
             }
         })
     }
@@ -166,6 +166,7 @@ class Reservation extends Component {
                                 required
                                 value={this.state.time2}
                                 onChange={(e)=>this.setState(prev => ({...prev, time2: e.target.value}))}>
+                                    <option disabled selected value> - </option>
                                     <option value="AM">AM</option>
                                     <option value="PM">PM</option>
                             </select>

@@ -201,29 +201,28 @@ app.put('/api/update', async (req,res)=>{
 //     //send to front end
 // })
 
-// app.post('/api/holiday', async(req,res)=>{
+app.post('/api/holiday', async(req,res)=>{
 
-//     console.log(holiday.holidays)
+    console.log(holiday.holidays)
 
-//     for(let i = 0; i < holiday.holidays.length; i++) {
-//         let object = holiday.holidays[i]
-//         for(let property in object) {
-//             if(req.body.reDate.includes(object[property])) {
-//                 return res.json({message: "Traffic Day"})
-//             }
-//             else {continue}
-//         }
-//     }
-//     res.json({message: "None"})
+    for(let i = 0; i < holiday.holidays.length; i++) {
+        let object = holiday.holidays[i]
+        for(let property in object) {
+            if(req.body.date.includes(object[property])) {
+                return res.json({message: "Traffic Day"})
+            }
+            else {continue}
+        }
+    }
+    res.json({message: "None"})
 
-// })
+})
 
 app.post('/api/reservation', async(req,res)=>{
     //call reservation schema
     //fill it out and save
-    console.log(req.session.user)
     try {
-        console.log(req.body.rePhone)
+
         if(req.body.rePhone.length >= 11) {
             return res.json({error: "phone number too long"})
         }
@@ -233,6 +232,8 @@ app.post('/api/reservation', async(req,res)=>{
             const myJSON = JSON.stringify(req.session.user);
             let obj = JSON.parse(myJSON);
 
+            
+
             const makeReserve = new ReservationSchema({
                 username: obj.username,
                 firstname: req.body.reFirstn, //dont forget req.body before reFirstn
@@ -240,6 +241,7 @@ app.post('/api/reservation', async(req,res)=>{
                 phone: req.body.rePhone,
                 email: req.body.reEmail,
                 date: req.body.reDate,
+                time: req.body.reTime,
                 numGuest: req.body.reGuest,
                 reservedTables: req.body.reTable,
                 ccNumber: req.body.creditNum,
@@ -257,6 +259,7 @@ app.post('/api/reservation', async(req,res)=>{
                 phone: req.body.rePhone,
                 email: req.body.reEmail,
                 date: req.body.reDate,
+                time: req.body.reTime,
                 numGuest: req.body.reGuest,
                 reservedTables: req.body.reTable,
                 ccNumber: req.body.creditNum,
