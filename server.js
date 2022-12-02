@@ -245,8 +245,8 @@ app.post('/api/reservation', async(req,res)=>{
         }
         
         //const newTable = 
-        console.log("you are in before function call");
-        checkTables(req.body.reDate, req.body.reTime, req.body.reGuest);
+        // console.log("you are in before function call");
+        // checkTables(req.body.reDate, req.body.reTime, req.body.reGuest);
         
 
         if(req.session.user) {
