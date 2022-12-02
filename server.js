@@ -51,27 +51,276 @@ function hasWhiteSpace(arg) {
     return (/\s/).test(arg);
 }
 
-async function checkTables(dater,timer, guester){
+function getSinglesExact(availTables,wantedSeats,saveThis){
+    let availCombinations = []
+    for(t=0; t<availTables.length; t++){ 
+        if(availTables[t][1] == wantedSeats){
+          availCombinations.push(availTables[t])
+        }
+    }
+  
+    if(availCombinations.length == 0) {
+      //console.log("singles false")
+      return false;
+    }
+    else { //we know availCombinations has something in it
+      if(saveThis.length == 0) {
+        return availCombinations[0]
+      }
+  
+    }
+  
+  }
+  
+  function getSinglesAtLeast(availTables,wantedSeats,saveThis) {
+    let availCombinations = []
+    for(t=0; t<availTables.length; t++){ 
+      if(availTables[t][1] > wantedSeats){
+        availCombinations.push(availTables[t])
+      }
+    }
+    if(availCombinations.length == 0) {
+      //console.log("singles at least false")
+      return false
+    }
+    else {
+      if(saveThis.length == 0) {
+        return availCombinations[0]
+      }
+    }
+  }
+  
+  function getDoublesExact(availTables,wantedSeats,saveThis) {
+    let availCombinations = []
+    for( i=0; i<availTables.length; i++){
+        for(j= i+1 ;j<availTables.length; j++){
+            if (availTables[i][1] + availTables[j][1] == wantedSeats){                
+                availCombinations.push([availTables[i], availTables[j]]);       
+            }
+        }
+    }
+    if(availCombinations.length == 0) {
+      //console.log("doubles false")
+      return false
+    }
+    else {
+      if(saveThis.length == 0) {
+        return availCombinations[0]
+      }
+      else {
+          let tempHere = []
+          for(g=0; g<availTables.length; g++){
+            if(saveThis[0]==availTables[g][0]){
+              //console.log("index3 is ", g
+              tempHere.push(availTables[g])
+              for( i=0; i<availTables.length; i++){
+                 if (availTables[g][1] + availTables[i][1] == wantedSeats){
+                   tempHere.push(availTables[i])
+                   return tempHere
+               }
+            }
+          }
+        }
+        
+      }
+    }
+    
+  }
+  
+  function getDoublesAtLeast(availTables,wantedSeats,saveThis) {
+    let availCombinations = []
+    for( i=0; i<availTables.length; i++){
+      for(j= i+1 ;j<availTables.length; j++){
+          if (availTables[i][1] + availTables[j][1] > wantedSeats){                
+              availCombinations.push([availTables[i], availTables[j]]);       
+          }
+      }
+    }
+    if(availCombinations.length == 0) {
+      //console.log("doubles at least false")
+      return false
+    }
+    else {
+      if(saveThis.length == 0) {
+        return availCombinations[0]
+      }
+      else {
+        let tempHere = []
+          for(g=0; g<availTables.length; g++){
+            if(saveThis[0]==availTables[g][0]){
+              //console.log("index3 is ", g
+              tempHere.push(availTables[g])
+              for( i=0; i<availTables.length; i++){
+                if (availTables[g][1] + availTables[i][1] > wantedSeats){
+                   tempHere.push(availTables[i])
+                   return tempHere
+               }
+            }
+          }
+        }  
+      }
+    }
+    
+  }
+    
+function spliceFunction(availTables,wantedSeats,spliceThis, saveThis){
+    let availCombinations = []
+    let whatever = availTables
+    if(spliceThis[1]===undefined){
+      const indexValue1 = spliceThis[0];
+      for(let y=0; y<availTables.length; y++){
+        if(indexValue1==whatever[y][0]){
+          const index = y
+          //console.log("index is ", index);
+          if (index > -1) { 
+          whatever.splice(index, 1);         
+          }
+        }
+      }
+      let singlesExact =  getSinglesExact(availTables,wantedSeats,saveThis)
+      let singlesAtLeast =  getSinglesAtLeast(availTables,wantedSeats,saveThis)
+      let doublesExact =  getDoublesExact(availTables,wantedSeats,saveThis)
+      let doublesAtLeast =  getDoublesAtLeast(availTables,wantedSeats,saveThis)
+      if(singlesExact){
+        //console.log(singlesExact, "singles")
+        return singlesExact
+      }
+      else if(singlesAtLeast) {
+        //console.log(singlesAtLeast,  "singles at least")
+        return singlesAtLeast
+      }
+      else if(doublesExact) {
+        //console.log(doublesExact, "doubles")
+        return doublesExact
+      }
+      else if(doublesAtLeast) {
+        //console.log(doublesAtLeast,  "doubles at least")
+        return doublesAtLeast
+      }
+      
+    }
+      
+    else 
+    {
+      const indexValue1 = spliceThis[0];
+  
+      const indexValue2 = spliceThis[1];
+  
+      for(let z=0; z<availTables.length; z++){
+        if(indexValue1==availTables[z][0]){
+  
+          const index = z
+          //availCombinations.push(whatever[index])
+         // console.log("index is ", index);
+          if (index > -1) { 
+          availTables.splice(index, 1); 
+        
+  
+          }
+  
+        }
+      }
+  
+      for(let x = 0; x < availTables.length; x++){
+        if(indexValue2==availTables[x][0]){
+          const index2 = x
+          //availCombinations.push(whatever[index2])
+          //console.log("index2 is ", index2);
+          if (index2 > -1) { 
+          availTables.splice(index2, 1);
+  
+          }
+        }
+      
+      }
+      let singlesExact =  getSinglesExact(availTables,wantedSeats,saveThis)
+      let singlesAtLeast = getSinglesAtLeast(availTables,wantedSeats,saveThis)
+      let doublesExact =  getDoublesExact(availTables,wantedSeats,saveThis)
+      let doublesAtLeast =  getDoublesAtLeast(availTables,wantedSeats,saveThis)
+      if(singlesExact){
+        //console.log(singlesExact, "singles2")
+        return singlesExact
+      }
+      else if(singlesAtLeast) {
+        //console.log(singlesAtLeast,  "singles at least2")
+        return singlesAtLeast
+      }
+      else if(doublesExact) {
+        //console.log(doublesExact, "doubles2")
+        return doublesExact
+      }
+      else if(doublesAtLeast) {
+        //console.log(doublesAtLeast,  "doubles at least2")
+        return doublesAtLeast
+      }
+      
+    }
+  }
 
+
+async function checkTables(dater,timer, guester, tabler){
+    let availTables = [[1,2],[2,2],[3,2],[4,2],[5,4],[6,4],[7,4],[8,6],[9,6],[10,8],[11,8]]
     let tempCollection = await ReservationSchema.find({date: dater, time: timer},'reservedTables').exec();
+    if(!tempCollection) return false
+    //if temp collection doesnt exist return
+    //console.log(tabler) //"3,7"
     let textTable = "";
     for(let i = 0; i < tempCollection.length;i++) {
         if(i == tempCollection.length - 1) {
             textTable += tempCollection[i].reservedTables;
         }
         else {
-            textTable += tempCollection[i].reservedTables + ",";
+            textTable += tempCollection[i].reservedTables + ","; //"3,7,2"
         }
     }
-    console.log(textTable)
-    console.log(typeof(textTable))
+    //split the strings to get array of strings
+    const myArr = tabler.split(",") //["3", "8"] <- tables customer wants 10  3,4 8,6
+    const textTableArr = textTable.split(",") //["3","7","2"] tables taken
+    let tobeSpliced = [] //["3"] //tables are already reserved
+    let tobeSaved = [] //["8"]  //tables not reserved yet
+
+    for(let i in myArr) {
+        if(textTableArr.includes(myArr[i])) {
+            tobeSpliced.push(parseInt(myArr[i]))
+        } else {
+            tobeSaved.push(parseInt(myArr[i]))
+        }
+    }
+    console.log(tobeSpliced)
+    if(tobeSpliced.length == 0) { //if the toBeSpliced array is empty
+        const tempTables = tabler
+        return tempTables;
+    }
+    else{
+        let temp = spliceFunction(availTables,guester, tobeSpliced, tobeSaved)
+        console.log(temp)
+        if(temp == false) {
+            return tempTables;
+        }
+        else if(temp) {
+            const storing = temp.toString().split(",");
+            let final = []
+            if(storing.length == 4) {
+                final.push(storing[0])
+                final.push(storing[2])
+            }
+            else if(storing.length == 2) {
+                final.push(storing[0])
+            }
+            return final.toString()
+            
+        }
+    }
+
+
+}
+    //console.log(textTable)
 
     //console.log(tempCollection)
     // console.log(tempCollection[i].reservedTables)
     // console.log(typeof(tempCollection[i].reservedTables))
 
-    return;
-}
+
 
 
 app.post('/api/register', async (req,res) => {
@@ -245,9 +494,11 @@ app.post('/api/reservation', async(req,res)=>{
         }
         
         //const newTable = 
-        // console.log("you are in before function call");
-        // checkTables(req.body.reDate, req.body.reTime, req.body.reGuest);
+        //console.log("you are in before function call");
         
+        
+        let replaceWith = await checkTables(req.body.reDate, req.body.reTime, req.body.reGuest, req.body.reTable);
+        console.log(replaceWith)
 
         if(req.session.user) {
             const myJSON = JSON.stringify(req.session.user);
@@ -256,11 +507,52 @@ app.post('/api/reservation', async(req,res)=>{
             const getProfileInfo = await ProfileSchema.findOne({username: obj.username});
             if(!getProfileInfo) return res.json({error: "We could not get your info"});
             else {
-                const makeReserve = new ReservationSchema({
-                    username: obj.username,
-                    firstname: getProfileInfo.firstname, 
-                    lastname: getProfileInfo.lastname,
-                    phone: req.body.rePhone, //dont forget req.body before rePhone
+                if(replaceWith === req.body.reTable) {
+                    const makeReserve = new ReservationSchema({
+                        username: obj.username,
+                        firstname: getProfileInfo.firstname, 
+                        lastname: getProfileInfo.lastname,
+                        phone: req.body.rePhone, //dont forget req.body before rePhone
+                        email: req.body.reEmail,
+                        date: req.body.reDate,
+                        time: req.body.reTime,
+                        numGuest: req.body.reGuest,
+                        reservedTables: req.body.reTable,
+                        ccNumber: req.body.creditNum,
+                        ccExpire: req.body.creditExp,
+                        ccv: req.body.creditCCV,
+                    });
+                    makeReserve.save()
+                } else {
+                    const makeReserve = new ReservationSchema({
+                        username: obj.username,
+                        firstname: getProfileInfo.firstname, 
+                        lastname: getProfileInfo.lastname,
+                        phone: req.body.rePhone, //dont forget req.body before rePhone
+                        email: req.body.reEmail,
+                        date: req.body.reDate,
+                        time: req.body.reTime,
+                        numGuest: req.body.reGuest,
+                        reservedTables: replaceWith,
+                        ccNumber: req.body.creditNum,
+                        ccExpire: req.body.creditExp,
+                        ccv: req.body.creditCCV,
+                    });
+                    makeReserve.save()
+                }
+
+                return res.json({msg: "RESERVED"})
+            }
+
+
+        }
+        else {
+            if(replaceWith === req.body.reTable) {
+                const makeReserveGuest = new ReservationSchema({
+                    username: '',
+                    firstname: req.body.reFirstn, //req.body in front
+                    lastname: req.body.reLastn,
+                    phone: req.body.rePhone,
                     email: req.body.reEmail,
                     date: req.body.reDate,
                     time: req.body.reTime,
@@ -269,30 +561,27 @@ app.post('/api/reservation', async(req,res)=>{
                     ccNumber: req.body.creditNum,
                     ccExpire: req.body.creditExp,
                     ccv: req.body.creditCCV,
-                });
-                makeReserve.save()
-                return res.json({msg: "RESERVED"})
+    
+                })
+                makeReserveGuest.save()
+            } else {
+                const makeReserveGuest = new ReservationSchema({
+                    username: '',
+                    firstname: req.body.reFirstn, //req.body in front
+                    lastname: req.body.reLastn,
+                    phone: req.body.rePhone,
+                    email: req.body.reEmail,
+                    date: req.body.reDate,
+                    time: req.body.reTime,
+                    numGuest: req.body.reGuest,
+                    reservedTables: replaceWith,
+                    ccNumber: req.body.creditNum,
+                    ccExpire: req.body.creditExp,
+                    ccv: req.body.creditCCV,
+    
+                })
+                makeReserveGuest.save()
             }
-
-
-        }
-        else {
-            const makeReserveGuest = new ReservationSchema({
-                username: '',
-                firstname: req.body.reFirstn, //req.body in front
-                lastname: req.body.reLastn,
-                phone: req.body.rePhone,
-                email: req.body.reEmail,
-                date: req.body.reDate,
-                time: req.body.reTime,
-                numGuest: req.body.reGuest,
-                reservedTables: req.body.reTable,
-                ccNumber: req.body.creditNum,
-                ccExpire: req.body.creditExp,
-                ccv: req.body.creditCCV,
-
-            })
-            makeReserveGuest.save()
             return res.json({msg: "RESERVED FOR GUEST"})
         }
 
