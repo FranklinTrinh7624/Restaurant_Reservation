@@ -41,7 +41,8 @@ class Reservation extends Component {
                 ccv: ''
             },
             tableSelectedArray: [],
-            guessMode: false
+            guessMode: false,
+            dateCheck: ''
         }
     }
 
@@ -96,6 +97,23 @@ class Reservation extends Component {
         })
     }
 
+    checkHoliday = () => {
+        this.setState(prev => ({...prev, formData: {...prev.formData, reDate: this.state.dateCheck}}))
+        axios({
+            method: "POST",
+            data: {date: this.state.dateCheck},
+            withCredentials: true,
+            url: "http://localhost:5000/api/holiday"
+        }).then((res) => {
+            if (res.data.error) {
+
+            }
+            else {
+
+            }
+        })
+    }
+
     paymentOptionList = Options.paymentOptions.map((opt, key) => (
         <option key={key} values={`${opt.code}`}>{opt.type}</option>
     ))
@@ -122,6 +140,11 @@ class Reservation extends Component {
                     </div>
                 </div> : <></>}
                 <div className='holiday-charge-form'>
+                    <form onSubmit={this.checkHoliday}>
+                        <h2>Select The Date for Reservation</h2>
+                        <Input label={'Date'} type={'date'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, dateCheck: d}))}/>
+                        <button type='submit' className='btn1'>Submit</button>
+                    </form>
                     <form onSubmit={this.submitForm}>
                         {this.state.isLoggedIn ? <></> : <>
                             <Input label={'First Name'} type={'text'} placeholder={'First name'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, firstname: d}}))}/>
@@ -129,7 +152,6 @@ class Reservation extends Component {
                         </>}
                         <Input label={'Phone Number'} type={'number'} placeholder={'Phone number'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, phone: d}}))}/>
                         <Input label={'Email'} type={'text'} placeholder={'Email address'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, email: d}}))}/>
-                        <Input label={'Date'} type={'date'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, date: d}}))}/>
                         <Input label={'Number of Guess'} type={'number'} placeholder={'Number of guess'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, numGuest: d}}))}/>
                         {this.state.isHoliday ?
                             <>
