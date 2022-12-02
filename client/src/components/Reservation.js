@@ -35,6 +35,7 @@ class Reservation extends Component {
                 phone: '',
                 email: '',
                 date: '',
+                time: '',
                 numGuest: '',
                 num: '',
                 exp: '',
@@ -42,7 +43,9 @@ class Reservation extends Component {
             },
             tableSelectedArray: [],
             guessMode: false,
-            dateCheck: ''
+            dateCheck: '',
+            time1: '',
+            time2: ''
         }
     }
 
@@ -69,7 +72,7 @@ class Reservation extends Component {
 
     submitForm = () => {
         //alert(`Table ${this.state.tableSelectedArray} Picked`)
-        //alert(typeof(this.state.formData.date))
+        //alert(typeof(this.state.formData.time))
         var tableSelected = this.state.tableSelectedArray.toString()
         axios({
             method: "POST",
@@ -79,6 +82,7 @@ class Reservation extends Component {
                 rePhone: this.state.formData.phone,
                 reEmail: this.state.formData.email,
                 reDate: this.state.formData.date,
+                reTime: this.state.formData.time,
                 reGuest: this.state.formData.numGuest,
                 reTable: tableSelected,
                 creditNum: this.state.formData.num,
@@ -98,7 +102,10 @@ class Reservation extends Component {
     }
 
     checkHoliday = () => {
-        this.setState(prev => ({...prev, formData: {...prev.formData, reDate: this.state.dateCheck}}))
+        //alert(this.state.formData.time)
+        const timestring = this.state.time1 + " " + this.state.time2
+        this.setState(prev => ({...prev, formData: {...prev.formData, date: this.state.dateCheck}}))
+        this.setState(prev => ({...prev, formData: {...prev.formData, time: timestring}}))
         axios({
             method: "POST",
             data: {date: this.state.dateCheck},
@@ -116,6 +123,10 @@ class Reservation extends Component {
 
     paymentOptionList = Options.paymentOptions.map((opt, key) => (
         <option key={key} values={`${opt.code}`}>{opt.type}</option>
+    ))
+
+    timeOptionList = Options.timeOptions.map((opt, key) => (
+        <option key={key} values={`${opt.value}`}>{opt.time}</option>
     ))
 
     render() {
@@ -142,7 +153,23 @@ class Reservation extends Component {
                 <div className='holiday-charge-form'>
                     <form onSubmit={this.checkHoliday}>
                         <h2>Select The Date for Reservation</h2>
-                        <Input label={'Date'} type={'date'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, dateCheck: d}))}/>
+                        <Input label={'Date'} type={'date'} placeholder={''} data={d => this.setState(prev => ({...prev, dateCheck: d}))}/>
+                        <label>Time:<br />
+                            <select
+                                id='time-select'
+                                required
+                                value={this.state.time1}
+                                onChange={(e)=>this.setState(prev => ({...prev, time1: e.target.value}))}>
+                                    {this.timeOptionList}
+                            </select>
+                            <select
+                                required
+                                value={this.state.time2}
+                                onChange={(e)=>this.setState(prev => ({...prev, time2: e.target.value}))}>
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                            </select>
+                        </label>
                         <button type='submit' className='btn1'>Submit</button>
                     </form>
                     <form onSubmit={this.submitForm}>

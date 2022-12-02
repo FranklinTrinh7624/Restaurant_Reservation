@@ -111,7 +111,11 @@
     font-size: 1.4rem;
 }
 
-.holiday-charge-form input {
+.holiday-charge-form input, .holiday-charge-form select {
     font-size: 1.4rem;
     padding: 0.25rem 0.75rem;
+}
+
+#time-select {
+    margin-right: 2rem;
 }
