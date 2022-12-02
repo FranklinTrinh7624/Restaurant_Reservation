@@ -161,13 +161,14 @@ class Reservation extends Component {
                                 required
                                 value={this.state.time1}
                                 onChange={(e)=>this.setState(prev => ({...prev, time1: e.target.value}))}>
+                                    <option value="" disabled />
                                     {this.timeOptionList}
                             </select>
                             <select
                                 required
                                 value={this.state.time2}
                                 onChange={(e)=>this.setState(prev => ({...prev, time2: e.target.value}))}>
-                                    <option disabled selected value> - </option>
+                                    <option value="" disabled />
                                     <option value="AM">AM</option>
                                     <option value="PM">PM</option>
                             </select>
