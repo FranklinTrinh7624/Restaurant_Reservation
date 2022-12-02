@@ -201,14 +201,14 @@ app.put('/api/update', async (req,res)=>{
 //     //send to front end
 // })
 
-// app.get('/api/holiday', async(req,res)=>{
+// app.post('/api/holiday', async(req,res)=>{
 
 //     console.log(holiday.holidays)
 
 //     for(let i = 0; i < holiday.holidays.length; i++) {
 //         let object = holiday.holidays[i]
 //         for(let property in object) {
-//             if(strDateHere.includes(object[property])) {
+//             if(req.body.reDate.includes(object[property])) {
 //                 return res.json({message: "Traffic Day"})
 //             }
 //             else {continue}
