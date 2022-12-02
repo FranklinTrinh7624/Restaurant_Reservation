@@ -68,6 +68,7 @@ class Reservation extends Component {
 
     submitForm = () => {
         //alert(`Table ${this.state.tableSelectedArray} Picked`)
+        //alert(typeof(this.state.formData.date))
         var tableSelected = this.state.tableSelectedArray.toString()
         axios({
             method: "POST",
@@ -128,9 +129,8 @@ class Reservation extends Component {
                         </>}
                         <Input label={'Phone Number'} type={'number'} placeholder={'Phone number'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, phone: d}}))}/>
                         <Input label={'Email'} type={'text'} placeholder={'Email address'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, email: d}}))}/>
-                        <Input label={'Date'} type={'text'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, date: d}}))}/>
+                        <Input label={'Date'} type={'date'} placeholder={'Date to reserve for'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, date: d}}))}/>
                         <Input label={'Number of Guess'} type={'number'} placeholder={'Number of guess'} data={d => this.setState(prev => ({...prev, formData: {...prev.formData, numGuest: d}}))}/>
-                        
                         {this.state.isHoliday ?
                             <>
                                 <h3 style={{marginTop: '3rem'}}>Due to high traffic, a hold fee of $10 will be required.</h3>
