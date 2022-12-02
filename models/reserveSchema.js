@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const reserveSchema = new mongoose.Schema ({
     username: {type: String, trim: true},
-    firstname: {type: String, required: true, trim: true},
-    lastname: {type: String, required: true, trim: true},
+    firstname: {type: String, trim: true},
+    lastname: {type: String, trim: true},
     phone: {type: String, required: true, trim: true, minlength: 10},
     email: {type: String, required: true, trim: true},
     date: {type: String, required: true},

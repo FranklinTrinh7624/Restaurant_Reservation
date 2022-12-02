@@ -51,9 +51,27 @@ function hasWhiteSpace(arg) {
     return (/\s/).test(arg);
 }
 
-// function protectGuest(arg){
-//     return (arg.includes('guest'))
-// }
+async function checkTables(dater,timer, guester){
+
+    let tempCollection = await ReservationSchema.find({date: dater, time: timer},'reservedTables').exec();
+    let textTable = "";
+    for(let i = 0; i < tempCollection.length;i++) {
+        if(i == tempCollection.length - 1) {
+            textTable += tempCollection[i].reservedTables;
+        }
+        else {
+            textTable += tempCollection[i].reservedTables + ",";
+        }
+    }
+    console.log(textTable)
+    console.log(typeof(textTable))
+
+    //console.log(tempCollection)
+    // console.log(tempCollection[i].reservedTables)
+    // console.log(typeof(tempCollection[i].reservedTables))
+
+    return;
+}
 
 
 app.post('/api/register', async (req,res) => {
@@ -203,7 +221,6 @@ app.put('/api/update', async (req,res)=>{
 
 app.post('/api/holiday', async(req,res)=>{
 
-    console.log(holiday.holidays)
 
     for(let i = 0; i < holiday.holidays.length; i++) {
         let object = holiday.holidays[i]
@@ -227,29 +244,37 @@ app.post('/api/reservation', async(req,res)=>{
             return res.json({error: "phone number too long"})
         }
         
+        //const newTable = 
+        console.log("you are in before function call");
+        checkTables(req.body.reDate, req.body.reTime, req.body.reGuest);
+        
 
         if(req.session.user) {
             const myJSON = JSON.stringify(req.session.user);
             let obj = JSON.parse(myJSON);
 
-            
+            const getProfileInfo = await ProfileSchema.findOne({username: obj.username});
+            if(!getProfileInfo) return res.json({error: "We could not get your info"});
+            else {
+                const makeReserve = new ReservationSchema({
+                    username: obj.username,
+                    firstname: getProfileInfo.firstname, 
+                    lastname: getProfileInfo.lastname,
+                    phone: req.body.rePhone, //dont forget req.body before rePhone
+                    email: req.body.reEmail,
+                    date: req.body.reDate,
+                    time: req.body.reTime,
+                    numGuest: req.body.reGuest,
+                    reservedTables: req.body.reTable,
+                    ccNumber: req.body.creditNum,
+                    ccExpire: req.body.creditExp,
+                    ccv: req.body.creditCCV,
+                });
+                makeReserve.save()
+                return res.json({msg: "RESERVED"})
+            }
 
-            const makeReserve = new ReservationSchema({
-                username: obj.username,
-                firstname: req.body.reFirstn, //dont forget req.body before reFirstn
-                lastname: req.body.reLastn,
-                phone: req.body.rePhone,
-                email: req.body.reEmail,
-                date: req.body.reDate,
-                time: req.body.reTime,
-                numGuest: req.body.reGuest,
-                reservedTables: req.body.reTable,
-                ccNumber: req.body.creditNum,
-                ccExpire: req.body.creditExp,
-                ccv: req.body.creditCCV,
-            });
-            makeReserve.save()
-            return res.json({msg: "RESERVED"})
+
         }
         else {
             const makeReserveGuest = new ReservationSchema({

@@ -101,8 +101,9 @@ class Reservation extends Component {
         })
     }
 
-    checkHoliday = () => {
+    checkHoliday = (e) => {
         //alert(this.state.formData.time)
+        e.preventDefault();
         const timestring = this.state.time1 + " " + this.state.time2
         this.setState(prev => ({...prev, formData: {...prev.formData, date: this.state.dateCheck}}))
         this.setState(prev => ({...prev, formData: {...prev.formData, time: timestring}}))
