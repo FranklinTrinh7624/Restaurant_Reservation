@@ -41,7 +41,7 @@ app.use(session({ //intializing the session parameters
     store: store,
 }));
 
-
+var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 function dinerNumberDigit(min, max){
     return (Math.floor(Math.random() * (max - min) + min))
@@ -49,6 +49,29 @@ function dinerNumberDigit(min, max){
 
 function hasWhiteSpace(arg) {
     return (/\s/).test(arg);
+}
+
+function isEmailValid(email) {
+    if (!email)
+        return false;
+
+    if(email.length>254)
+        return false;
+
+    var valid = emailRegex.test(email);
+    if(!valid)
+        return false;
+
+    // Further checking of some things regex can't handle
+    var parts = email.split("@");
+    if(parts[0].length>64)
+        return false;
+
+    var domainParts = parts[1].split(".");
+    if(domainParts.some(function(part) { return part.length>63; }))
+        return false;
+
+    return true;
 }
 
 function getSinglesExact(availTables,wantedSeats,saveThis){
@@ -496,7 +519,15 @@ app.post('/api/reservation', async(req,res)=>{
         //const newTable = 
         //console.log("you are in before function call");
         
-        
+        if(!isEmailValid(req.body.reEmail)) {
+            return res.json({error: "Invalid Email"})
+        }
+
+        const tempDate = new Date();
+        const storeUserDate = new Date(req.body.reDate)
+        if(storeUserDate < tempDate) {
+            return res.json({error: "You are going back in time, pick another date"})
+        }
         let replaceWith = await checkTables(req.body.reDate, req.body.reTime, req.body.reGuest, req.body.reTable);
         console.log(replaceWith)
 
