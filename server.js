@@ -373,7 +373,7 @@ app.post('/api/register', async (req,res) => {
             return res.json({errror2: "Password should be 8 chracters minimum"});
         }
         else if(hasWhiteSpace(req.body.regiPassword)) {
-            return res.json({error2: "Password should not have whitespace"});
+            return res.json({errror2: "Password should not have whitespace"});
         }
 
         let hashpass;
@@ -515,6 +515,11 @@ app.post('/api/reservation', async(req,res)=>{
         if(req.body.rePhone.length >= 11) {
             return res.json({error: "phone number too long"})
         }
+        
+        if(req.body.rePhone.length < 10) {
+            return res.json({error: "phone number too short"})
+        }
+
         
         //const newTable = 
         //console.log("you are in before function call");

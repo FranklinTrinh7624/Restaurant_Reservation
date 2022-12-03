@@ -69,8 +69,8 @@ class Register extends Component {
             else if(res.data.error1) {
                 alert(res.data.error1);
             }
-            else if(res.data.error2) {
-                alert(res.data.error2);
+            else if(res.data.errror2) {
+                alert(res.data.errror2);
             }
             else {
                 alert(res.data.msg);

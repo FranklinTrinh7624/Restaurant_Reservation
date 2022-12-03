@@ -25,12 +25,12 @@ class Login extends Component {
             url: "http://localhost:5000/api/login"
         }).then((res) => {
             if(res.data.error){
-                //alert(res.data.error);
+                alert(res.data.error);
                 this.setState(prev => ({...prev, authorizedStatus: false}))
             }
             //else do something about session(token stuff?)
             else {
-                //alert(res.data.msg);
+                alert(res.data.msg);
                 this.setState(prev => ({...prev, loginState: true, authorizedStatus: true}), this.logInState)
             }
         });
